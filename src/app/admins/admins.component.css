@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.main-Box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  padding: 20px;
+}
+
+.dialog-box {
+  display: flex;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.titles {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.innerBox {
+  display: flex;
+  justify-content: space-between;
+}

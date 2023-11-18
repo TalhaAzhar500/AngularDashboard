@@ -1,0 +1,62 @@
+<mat-dialog-content style="width: 400px">
+  <header><h2>Add Admins</h2></header>
+  <form [formGroup]="adminForm">
+    <p>
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="admin_name"
+          required=""
+        />
+        <mat-error *ngIf="adminForm.get('admin_name')?.hasError('required')"
+          >Name is required</mat-error
+        >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field style="width: 100%">
+        <input matInput placeholder="Email" required formControlName="email" />
+        <mat-error *ngIf="adminForm.get('email')?.hasError('required')"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="adminForm.get('email')?.hasError('email')"
+          >Invalid email</mat-error
+        >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          required
+          formControlName="password"
+        />
+        <mat-error *ngIf="adminForm.get('password')?.hasError('required')"
+          >Role is required</mat-error
+        >
+      </mat-form-field>
+    </p>
+    <p *ngIf="isValid" style="color: red">Please fill all fields</p>
+  </form>
+  <div style="display: flex">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="($event.preventDefault); submitForm()"
+    >
+      Save
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      style="margin-left: 5px"
+      matDialogClose
+    >
+      Cancel
+    </button>
+  </div>
+</mat-dialog-content>

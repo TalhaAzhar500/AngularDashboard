@@ -1,0 +1,37 @@
+<div>
+  <mat-card>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <h2>Log In</h2>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="username"
+            required
+          />
+          <mat-error> Please provide a valid email address </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <mat-error> Please provide a valid password </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="loading">
+          <ng-container *ngIf="!loading; else spinnerContent">
+            Login
+          </ng-container>
+          <ng-template #spinnerContent>
+            <mat-spinner diameter="20"></mat-spinner>
+          </ng-template>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
