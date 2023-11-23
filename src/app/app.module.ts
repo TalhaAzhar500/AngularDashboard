@@ -21,15 +21,30 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotFoundComponent } from './404/404.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { ProjectsComponent } from './projects/projects.component';
+import { ProjectModalComponent } from './projects/project-modal/project-modal.component';
+import { MemberModalComponent } from './members/member-modal/member-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MenuComponent } from './common/menu/menu.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminsComponent,
-    MembersComponent,
     ModalComponent,
+    MembersComponent,
+    MemberModalComponent,
     LoginComponent,
     NotFoundComponent,
+    ProjectsComponent,
+    ProjectModalComponent,
+    ResetPasswordComponent,
+    SignUpComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,9 +59,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatSelectModule,
     MatCardModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

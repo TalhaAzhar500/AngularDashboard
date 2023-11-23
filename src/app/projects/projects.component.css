@@ -9,7 +9,7 @@ table {
 }
 
 .dialog-box {
-  display: flex;
+  display: inline-flex;
 }
 
 .title {
@@ -25,8 +25,4 @@ table {
 .innerBox {
   display: flex;
   justify-content: space-between;
-}
-
-.dlt-dialog {
-  padding: 10px;
 }

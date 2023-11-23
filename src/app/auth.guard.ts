@@ -5,11 +5,27 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   const router = inject(Router);
   const data: any = localStorage.getItem('userData');
   const userData = JSON.parse(data);
+
   if (userData) {
     if (route.routeConfig?.path === 'login') {
       router.navigate(['admins']);
       return false;
     }
+
+    if (route.routeConfig?.path === 'admins') {
+      if (userData.role !== 'super') {
+        router.navigate(['projects']);
+        return false;
+      }
+    }
+
+    if (route.routeConfig?.path === 'projects') {
+      if (userData.role === 'user') {
+        router.navigate(['members']);
+        return false;
+      }
+    }
+
     return true;
   } else {
     if (route.routeConfig?.path === 'login') {

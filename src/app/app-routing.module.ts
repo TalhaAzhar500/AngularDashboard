@@ -5,12 +5,22 @@ import { MembersComponent } from './members/members.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './404/404.component';
 import { authGuard } from './auth.guard';
+import { ProjectsComponent } from './projects/projects.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
   { path: 'admins', component: AdminsComponent, canActivate: [authGuard] },
   { path: 'members', component: MembersComponent, canActivate: [authGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [authGuard] },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    canActivate: [authGuard],
+  },
   { path: '**', component: NotFoundComponent },
 ];
 

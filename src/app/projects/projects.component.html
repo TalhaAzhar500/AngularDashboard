@@ -1,0 +1,89 @@
+<div class="main-Box">
+  <div class="innerBox">
+    <div class="title">Projects</div>
+    <div class="dialog-box">
+      <button mat-raised-button color="primary" (click)="openDialog()">
+        Add Project
+      </button>
+      <menu style="margin: 0; padding-left: 10px"></menu>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="titles">Project Name</th>
+      <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="stack">
+      <th mat-header-cell *matHeaderCellDef class="titles">Stack</th>
+      <td mat-cell *matCellDef="let element">{{ element?.stack }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="team_lead">
+      <th mat-header-cell *matHeaderCellDef class="titles">Team Lead</th>
+      <td mat-cell *matCellDef="let element">{{ element?.team_lead }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef class="titles">Duration</th>
+      <td mat-cell *matCellDef="let element">{{ element?.duration }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="coordinator">
+      <th mat-header-cell *matHeaderCellDef class="titles">Coordinator</th>
+      <td mat-cell *matCellDef="let element">{{ element?.coordinator }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="platform">
+      <th mat-header-cell *matHeaderCellDef class="titles">Platform</th>
+      <td mat-cell *matCellDef="let element">{{ element?.platform }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef class="titles">Client</th>
+      <td mat-cell *matCellDef="let element">{{ element?.client }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="consultant">
+      <th mat-header-cell *matHeaderCellDef class="titles">Consultant</th>
+      <td mat-cell *matCellDef="let element">{{ element?.consultant }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="start_date">
+      <th mat-header-cell *matHeaderCellDef class="titles">Start Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.start_date | date }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef class="titles">End Date</th>
+      <td mat-cell *matCellDef="let element">{{ element?.end_date | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="titles">Status</th>
+      <td mat-cell *matCellDef="let element">{{ element?.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef class="titles">Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="action" #actionTrigger>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #action="matMenu">
+          <button mat-menu-item (click)="handleDelteAdmin(element._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-menu-item (click)="handleEditAdmin(element._id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

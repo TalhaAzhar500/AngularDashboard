@@ -3,7 +3,6 @@
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
         <h2>Log In</h2>
-
         <mat-form-field>
           <input
             matInput
@@ -21,17 +20,17 @@
             formControlName="password"
             required
           />
-          <mat-error> Please provide a valid password </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" [disabled]="loading">
-          <ng-container *ngIf="!loading; else spinnerContent">
-            Login
-          </ng-container>
-          <ng-template #spinnerContent>
-            <mat-spinner diameter="20"></mat-spinner>
-          </ng-template>
+          @if (!loading) { Sign In } @else {
+          <mat-spinner diameter="20"></mat-spinner>
+          }
         </button>
       </form>
     </mat-card-content>
   </mat-card>
+  <a routerLink="" class="link">Forgot Password? </a>
+  <a routerLink="/sign-up" style="margin-top: 15px" class="link"
+    >Member Sign Up</a
+  >
 </div>

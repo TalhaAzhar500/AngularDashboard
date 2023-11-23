@@ -1,0 +1,65 @@
+<div>
+  <mat-card>
+    <mat-card-content>
+      <form
+        (ngSubmit)="$event.preventDefault(); onSubmit()"
+        [formGroup]="signUpForm"
+      >
+        <h2>Sign Up</h2>
+        <div class="container">
+          <mat-form-field style="width: 48%">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="first_name" required />
+            <mat-error> </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width: 48%">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" required />
+            <mat-error> </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required />
+          <mat-error> </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tech Stack</mat-label>
+          <mat-select formControlName="tech_stack">
+            @for (option of options; track $index) {
+            <mat-option [value]="option">{{ option }}</mat-option>
+            }
+          </mat-select>
+          <mat-error> </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="email" required />
+          <mat-error> </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="loading">
+          @if (!loading) { Submit } @else {
+          <mat-spinner diameter="20"></mat-spinner>
+          }
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

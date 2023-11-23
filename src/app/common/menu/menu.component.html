@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  @if (role==="super") {
+  <button mat-menu-item (click)="NavigateToAdmins()">Admins</button>
+  }
+  <button mat-menu-item (click)="NavigateToMembers()">Members</button>
+  @if (role!=='user') {
+  <button mat-menu-item (click)="NavigateToProjects()">Projects</button>
+  } @if (role!=="super") {
+  <button mat-menu-item (click)="NavigateToResetPassword()">
+    Reset Password
+  </button>
+  }
+  <button mat-menu-item (click)="handleLogout()">Logout</button>
+</mat-menu>

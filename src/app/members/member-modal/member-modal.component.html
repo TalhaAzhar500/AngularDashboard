@@ -1,0 +1,78 @@
+<mat-dialog-content style="width: 400px">
+  <header><h2>Member Details</h2></header>
+  <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+    <mat-form-field style="width: 100%">
+      <mat-label>Userame</mat-label>
+      <input matInput formControlName="username" required="" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name" required="" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required="" />
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Tech Stack</mat-label>
+      <mat-select formControlName="tech_stack">
+        @for (option of options; track $index) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Team Lead</mat-label>
+      <mat-select matInput formControlName="team_lead" required="">
+        @for (Toption of Toptions; track $index) {
+        <mat-option [value]="Toption">{{ Toption }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Projects</mat-label>
+      <mat-select matInput formControlName="projects" required="" multiple>
+        @for (option of Poptions; track $index) {
+        <mat-option [value]="option._id">{{ option.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Expense</mat-label>
+      <input matInput formControlName="expense" type="number" />
+    </mat-form-field>
+
+    @if (isValid) {
+    <p style="color: red">Please fill all fields</p>
+    }
+  </form>
+  <div style="display: flex">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      style="margin-left: 5px"
+      matDialogClose
+    >
+      Cancel
+    </button>
+  </div>
+</mat-dialog-content>
