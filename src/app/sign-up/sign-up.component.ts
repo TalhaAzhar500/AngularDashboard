@@ -29,11 +29,14 @@ export class SignUpComponent {
 
   signUpForm = new FormGroup({
     first_name: new FormControl('', [Validators.required]),
-    last_name: new FormControl('', [Validators.required]),
+    last_name: new FormControl(''),
     username: new FormControl('', [Validators.required]),
-    tech_stack: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    tech_stack: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
   });
 
   loading: boolean = false;

@@ -11,6 +11,7 @@ export class UrlService {
   ProjectURL = this.BaseURL + '/projects';
   SignUpURL = this.MemberURL + '/signup';
   ResetPassURL = this.BaseURL + '/reset-password';
+  ForgotPassURL = this.BaseURL + '/forget-password';
 
   constructor() {}
 }

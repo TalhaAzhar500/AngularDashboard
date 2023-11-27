@@ -10,18 +10,21 @@
           <mat-form-field style="width: 48%">
             <mat-label>First Name</mat-label>
             <input matInput formControlName="first_name" required />
-            <mat-error> </mat-error>
+            @if (signUpForm.get('first_name')?.hasError('required')) {
+            <mat-error>First Name is required</mat-error>
+            }
           </mat-form-field>
           <mat-form-field style="width: 48%">
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="last_name" required />
-            <mat-error> </mat-error>
+            <input matInput formControlName="last_name" />
           </mat-form-field>
         </div>
         <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" required />
-          <mat-error> </mat-error>
+          @if (signUpForm.get('username')?.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+          }
         </mat-form-field>
         <mat-form-field>
           <mat-label>Tech Stack</mat-label>
@@ -30,12 +33,16 @@
             <mat-option [value]="option">{{ option }}</mat-option>
             }
           </mat-select>
-          <mat-error> </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email Address</mat-label>
           <input matInput formControlName="email" required />
-          <mat-error> </mat-error>
+          <mat-error *ngIf="signUpForm.get('email')?.hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="signUpForm.get('email')?.hasError('email')"
+            >Invalid email</mat-error
+          >
         </mat-form-field>
         <mat-form-field>
           <mat-label>Enter your password</mat-label>
@@ -53,6 +60,11 @@
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
+          @if (signUpForm.get('password')?.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+          }@else {
+          <mat-error>Password should be minimum of 5 length</mat-error>
+          }
         </mat-form-field>
         <button mat-raised-button color="primary" [disabled]="loading">
           @if (!loading) { Submit } @else {

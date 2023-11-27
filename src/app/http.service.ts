@@ -13,7 +13,6 @@ export class HTTPService {
 
   private getHeaders(): HttpHeaders {
     const token: string = this.userDetails.data.access_token;
-
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -47,6 +46,14 @@ export class HTTPService {
   reset(url: string, passwords: any) {
     const headers = this.getHeaders();
     return this.http.post(url, passwords, { headers });
+  }
+
+  forget(url: string, passwords: any) {
+    return this.http.post(url, passwords);
+  }
+
+  sendEmail(url: string, email: any) {
+    return this.http.post(url, email);
   }
 }
 

@@ -58,21 +58,20 @@ export class MemberModalComponent {
   memberForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     first_name: new FormControl('', [Validators.required]),
-    last_name: new FormControl('', [Validators.required]),
+    last_name: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
-    tech_stack: new FormControl('', [Validators.required]),
-    team_lead: new FormControl('', [Validators.required]),
-    projects: new FormControl([], [Validators.required]),
+    tech_stack: new FormControl(''),
+    team_lead: new FormControl(''),
+    projects: new FormControl([]),
     expense: new FormControl(0, [Validators.required]),
   });
 
   onSubmit() {
-    // if (this.memberForm.valid) {
-    console.log('data', this.memberForm.value);
-    // this.isValid = false;
-    this.dialogRef.close(this.memberForm.value);
-    // } else {
-    // this.isValid = true;
-    // }
+    if (this.memberForm.valid) {
+      this.isValid = false;
+      this.dialogRef.close(this.memberForm.value);
+    } else {
+      this.isValid = true;
+    }
   }
 }

@@ -1,13 +1,25 @@
+@if (!tableLoading) {
 <div class="main-Box">
   <div class="innerBox">
     <div class="title">Admins</div>
+
     <div class="dialog-box">
-      <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-form-field>
+        <mat-label>Search by name</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openDialog()"
+        class="add-btn"
+      >
         Add Admins
       </button>
       <menu style="margin: 0; padding-left: 10px"></menu>
     </div>
   </div>
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z">
     <!-- Name Column -->
     <ng-container matColumnDef="admin_name">
@@ -31,7 +43,11 @@
       <th mat-header-cell *matHeaderCellDef class="titles">Actions</th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button [matMenuTriggerFor]="action" #actionTrigger>
+          @if (!element.loading) {
           <mat-icon>delete</mat-icon>
+          }@else {
+          <mat-spinner diameter="20"></mat-spinner>
+          }
         </button>
         <mat-menu #action="matMenu">
           <div class="dlt-dialog">
@@ -39,7 +55,7 @@
             <button
               mat-raised-button
               color="primary"
-              (click)="handleDelteAdmin(element._id)"
+              (click)="handleDelteAdmin(element)"
             >
               Yes
             </button>
@@ -55,3 +71,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
+}@else {
+<div class="loading-box">
+  <div class="loader">Loading Admins Data...</div>
+</div>
+}

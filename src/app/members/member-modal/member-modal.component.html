@@ -3,12 +3,18 @@
   <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
     <mat-form-field style="width: 100%">
       <mat-label>Userame</mat-label>
-      <input matInput formControlName="username" required="" />
+      <input matInput formControlName="username" required />
+      @if (memberForm.get('username')?.hasError('required')) {
+      <mat-error>Username is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>First Name</mat-label>
-      <input matInput formControlName="first_name" required="" />
+      <input matInput formControlName="first_name" required />
+      @if (memberForm.get('first_name')?.hasError('required')) {
+      <mat-error>First Name is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
@@ -18,7 +24,12 @@
 
     <mat-form-field style="width: 100%">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" required="" />
+      <input matInput formControlName="email" required />
+      @if(memberForm.get('email')?.hasError('required')){
+      <mat-error>Email is required</mat-error>
+      }@else {
+      <mat-error>Invalid email</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
@@ -32,7 +43,7 @@
 
     <mat-form-field style="width: 100%">
       <mat-label>Team Lead</mat-label>
-      <mat-select matInput formControlName="team_lead" required="">
+      <mat-select matInput formControlName="team_lead">
         @for (Toption of Toptions; track $index) {
         <mat-option [value]="Toption">{{ Toption }}</mat-option>
         }
@@ -41,7 +52,7 @@
 
     <mat-form-field style="width: 100%">
       <mat-label>Projects</mat-label>
-      <mat-select matInput formControlName="projects" required="" multiple>
+      <mat-select matInput formControlName="projects" multiple>
         @for (option of Poptions; track $index) {
         <mat-option [value]="option._id">{{ option.name }}</mat-option>
         }
@@ -56,23 +67,23 @@
     @if (isValid) {
     <p style="color: red">Please fill all fields</p>
     }
+    <div style="display: flex; margin-top: 5px">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Save
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        style="margin-left: 5px"
+        matDialogClose
+      >
+        Cancel
+      </button>
+    </div>
   </form>
-  <div style="display: flex">
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      (click)="onSubmit()"
-    >
-      Save
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      style="margin-left: 5px"
-      matDialogClose
-    >
-      Cancel
-    </button>
-  </div>
 </mat-dialog-content>

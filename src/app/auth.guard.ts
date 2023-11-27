@@ -13,14 +13,14 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
     }
 
     if (route.routeConfig?.path === 'admins') {
-      if (userData.role !== 'super') {
+      if (userData?.role !== 'super') {
         router.navigate(['projects']);
         return false;
       }
     }
 
     if (route.routeConfig?.path === 'projects') {
-      if (userData.role === 'user') {
+      if (userData?.role === 'user') {
         router.navigate(['members']);
         return false;
       }

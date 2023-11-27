@@ -1,17 +1,30 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger>
-  <mat-icon>more_vert</mat-icon>
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  #menuTrigger
+  style="font-size: 12px; text-align: center"
+>
+  <mat-icon style="font-size: 29px">list</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
   @if (role==="super") {
-  <button mat-menu-item (click)="NavigateToAdmins()">Admins</button>
-  }
-  <button mat-menu-item (click)="NavigateToMembers()">Members</button>
-  @if (role!=='user') {
-  <button mat-menu-item (click)="NavigateToProjects()">Projects</button>
-  } @if (role!=="super") {
-  <button mat-menu-item (click)="NavigateToResetPassword()">
-    Reset Password
+  <button mat-menu-item (click)="NavigateToAdmins()">
+    <mat-icon style="margin-right: 2px">account_circle</mat-icon>Admins
   </button>
   }
-  <button mat-menu-item (click)="handleLogout()">Logout</button>
+  <button mat-menu-item (click)="NavigateToMembers()">
+    <mat-icon style="margin-right: 2px">supervisor_account</mat-icon>Members
+  </button>
+  @if (role!=='user') {
+  <button mat-menu-item (click)="NavigateToProjects()">
+    <mat-icon style="margin-right: 2px">assignment</mat-icon>Projects
+  </button>
+  } @if (role!=="super") {
+  <button mat-menu-item (click)="NavigateToResetPassword()">
+    <mat-icon style="margin-right: 2px">refresh</mat-icon> Reset Password
+  </button>
+  }
+  <button mat-menu-item (click)="handleLogout()">
+    <mat-icon style="margin-right: 2px">subdirectory_arrow_left</mat-icon>Logout
+  </button>
 </mat-menu>

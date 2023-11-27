@@ -6,6 +6,7 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   margin: 20px;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .dialog-box {
@@ -13,6 +14,7 @@ table {
 }
 
 .title {
+  margin-top: 8px;
   font-size: 30px;
   font-weight: bold;
 }
@@ -29,4 +31,69 @@ table {
 
 .dlt-dialog {
   padding: 10px;
+}
+
+.add-btn {
+  margin-left: 10px;
+  padding: 28px 10px;
+  font-size: 17px;
+}
+
+.loading-box {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 350px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: helvetica, arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #2b59ff;
+  letter-spacing: 0.2em;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: blue;
+    position: absolute;
+    animation: load 0.7s infinite alternate ease-in-out;
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+}
+
+@keyframes load {
+  0% {
+    left: 0;
+    height: 30px;
+    width: 15px;
+  }
+  50% {
+    height: 8px;
+    width: 40px;
+  }
+  100% {
+    left: 335px;
+    height: 30px;
+    width: 15px;
+  }
 }

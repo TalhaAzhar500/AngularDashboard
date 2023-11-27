@@ -3,65 +3,85 @@
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <mat-form-field style="width: 100%">
       <mat-label>Project Name</mat-label>
-      <input matInput formControlName="name" required="" />
-      <mat-error *ngIf="projectForm.get('admin_name')?.hasError('required')"
-        >Name is required</mat-error
-      >
+      <input matInput formControlName="name" required />
+      @if (projectForm.get('name')?.hasError('required')) {
+      <mat-error>Name is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Stack</mat-label>
-      <input matInput formControlName="stack" required="" />
+      <input matInput formControlName="stack" required />
+      @if (projectForm.get('stack')?.hasError('required')) {
+      <mat-error>Stack is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Team Lead</mat-label>
-      <mat-select matInput formControlName="team_lead" required="">
+      <mat-select matInput formControlName="team_lead" required>
         @for (Toption of Toptions; track $index) {
         <mat-option [value]="Toption">{{ Toption }}</mat-option>
-        } @if (projectForm.get('admin_name')?.hasError('required')) {
-        <mat-error>Name is required</mat-error>
         }
       </mat-select>
+      @if (projectForm.get('team_lead')?.hasError('required')) {
+      <mat-error>Team Lead is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Duration</mat-label>
-      <input matInput formControlName="duration" required="" />
+      <input matInput formControlName="duration" required />
+      @if (projectForm.get('duration')?.hasError('required')) {
+      <mat-error>Duration is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Coordinator</mat-label>
-      <mat-select matInput formControlName="coordinator" required="">
+      <mat-select matInput formControlName="coordinator" required>
         @for (Toption of Toptions; track $index) {
         <mat-option [value]="Toption">{{ Toption }}</mat-option>
-        } @if (projectForm.get('admin_name')?.hasError('required')) {
-        <mat-error>Name is required</mat-error>
         }
       </mat-select>
+      @if (projectForm.get('coordinator')?.hasError('required')) {
+      <mat-error>coordinator is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Platform</mat-label>
-      <input matInput formControlName="platform" required="" />
+      <input matInput formControlName="platform" required />
+      @if (projectForm.get('paltform')?.hasError('required')) {
+      <mat-error>coordinator is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Client</mat-label>
-      <input matInput formControlName="client" required="" />
+      <input matInput formControlName="client" required />
+      @if (projectForm.get('client')?.hasError('required')) {
+      <mat-error>Client is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Consultant</mat-label>
-      <input matInput formControlName="consultant" required="" />
+      <input matInput formControlName="consultant" required />
+      @if (projectForm.get('consultant')?.hasError('required')) {
+      <mat-error>Consultant is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
       <mat-label>Status</mat-label>
-      <mat-select matInput formControlName="status" required="">
+      <mat-select matInput formControlName="status" required>
         <mat-option value="completed">Completed</mat-option>
         <mat-option value="on-going">On-Going</mat-option>
       </mat-select>
+      @if (projectForm.get('status')?.hasError('required')) {
+      <mat-error>Status is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
@@ -70,7 +90,7 @@
         matInput
         [matDatepicker]="picker1"
         formControlName="start_date"
-        required=""
+        required
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -78,6 +98,9 @@
         [for]="picker1"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
+      @if (projectForm.get('start_date')?.hasError('required')) {
+      <mat-error>Start Date is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 100%">
@@ -86,7 +109,7 @@
         matInput
         [matDatepicker]="picker2"
         formControlName="end_date"
-        required=""
+        required
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -94,28 +117,24 @@
         [for]="picker2"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
+      @if (projectForm.get('end_date')?.hasError('required')) {
+      <mat-error>End Date is required</mat-error>
+      }
     </mat-form-field>
 
     @if (isValid) {
     <p style="color: red">Please fill all fields</p>
     }
+    <div style="display: flex; margin-top: 10px">
+      <button mat-raised-button color="primary">Save</button>
+      <button
+        mat-stroked-button
+        color="primary"
+        style="margin-left: 5px"
+        matDialogClose
+      >
+        Cancel
+      </button>
+    </div>
   </form>
-  <div style="display: flex">
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      (click)="onSubmit()"
-    >
-      Save
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      style="margin-left: 5px"
-      matDialogClose
-    >
-      Cancel
-    </button>
-  </div>
 </mat-dialog-content>

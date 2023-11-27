@@ -7,6 +7,7 @@ import { HTTPService } from '../http.service';
 import { ToastrService } from 'ngx-toastr';
 import { UrlService } from '../shared/url.service';
 import { AdminFormat } from '../shared/user.interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'admins',
@@ -19,16 +20,31 @@ export class AdminsComponent implements OnInit {
 
   displayedColumns: string[] = ['admin_name', 'email', 'role', 'action'];
   dataSource!: AdminFormat[];
+  search!: AdminFormat[];
+  loading: boolean = false;
+  tableLoading: boolean = true;
 
   constructor(
     private matDialog: MatDialog,
     private http: HTTPService,
     private toast: ToastrService,
-    private api: UrlService
+    private api: UrlService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getData();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue: any = (event.target as HTMLInputElement).value;
+    const data = this.search.filter((data) => {
+      return filterValue.toLowerCase() === ''
+        ? data
+        : data.admin_name.toLowerCase().includes(filterValue);
+    });
+    this.dataSource = data;
+    this.matTable.renderRows();
   }
 
   getData() {
@@ -36,8 +52,14 @@ export class AdminsComponent implements OnInit {
       next: (response) => {
         const data: any = response;
         this.dataSource = data;
+        this.search = data;
+        this.tableLoading = false;
       },
       error: (error) => {
+        if (error.status === 401) {
+          localStorage.clear();
+          this.router.navigate(['login']);
+        }
         console.log('Error occoured', error);
         this.toast.error('Error in getting Members from Server');
       },
@@ -64,17 +86,20 @@ export class AdminsComponent implements OnInit {
     });
   }
 
-  handleDelteAdmin(id: number) {
-    this.http.delete(`${this.api.AdminURL}/${id}`).subscribe({
+  handleDelteAdmin(element: any): void {
+    element.loading = !element.loading;
+    this.http.delete(`${this.api.AdminURL}/${element._id}`).subscribe({
       next: (response: any) => {
         this.getData();
         this.matTable.renderRows();
         setTimeout(() => {
           this.toast.success(response.message);
         }, 1000);
+        element.loading = !element.loading;
       },
       error: (error) => {
         console.error('Error Occoured', error);
+        element.loading = !element.loading;
       },
     });
   }

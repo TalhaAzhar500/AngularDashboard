@@ -16,7 +16,7 @@ export class ProjectModalComponent {
   ) {
     if (data) {
       const editData = data.adminsData?.find(
-        (adminData: any) => adminData._id === data.idToDelete
+        (adminData: any) => adminData._id === data.id
       );
       if (editData) {
         this.projectForm.patchValue({
@@ -51,7 +51,7 @@ export class ProjectModalComponent {
     status: new FormControl('', [Validators.required]),
     start_date: new FormControl('', [Validators.required]),
     end_date: new FormControl('', [Validators.required]),
-    cost: new FormControl('0', [Validators.required]),
+    cost: new FormControl('0'),
   });
 
   onSubmit() {

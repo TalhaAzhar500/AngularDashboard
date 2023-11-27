@@ -30,6 +30,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MenuComponent } from './common/menu/menu.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ForgotPasswordModalComponent } from './login/forgot-password-modal/forgot-password-modal.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ProjectsModalComponent } from './members/projects-modal/projects-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +42,16 @@ import { MatNativeDateModule } from '@angular/material/core';
     ModalComponent,
     MembersComponent,
     MemberModalComponent,
+    ProjectsModalComponent,
     LoginComponent,
+    ForgotPasswordModalComponent,
     NotFoundComponent,
     ProjectsComponent,
     ProjectModalComponent,
     ResetPasswordComponent,
     SignUpComponent,
     MenuComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +72,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

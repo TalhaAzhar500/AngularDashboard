@@ -1,6 +1,6 @@
 <mat-dialog-content style="width: 400px">
   <header><h2>Add Admins</h2></header>
-  <form [formGroup]="adminForm">
+  <form [formGroup]="adminForm" (ngSubmit)="submitForm()">
     <p>
       <mat-form-field style="width: 100%">
         <input
@@ -34,29 +34,27 @@
           required
           formControlName="password"
         />
-        <mat-error *ngIf="adminForm.get('password')?.hasError('required')"
-          >Role is required</mat-error
-        >
+        <mat-error>Password should be minimum of 5 length</mat-error>
       </mat-form-field>
     </p>
     <p *ngIf="isValid" style="color: red">Please fill all fields</p>
+    <div style="display: flex">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="($event.preventDefault); submitForm()"
+      >
+        Save
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        style="margin-left: 5px"
+        matDialogClose
+      >
+        Cancel
+      </button>
+    </div>
   </form>
-  <div style="display: flex">
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      (click)="($event.preventDefault); submitForm()"
-    >
-      Save
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      style="margin-left: 5px"
-      matDialogClose
-    >
-      Cancel
-    </button>
-  </div>
 </mat-dialog-content>

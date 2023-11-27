@@ -2,7 +2,9 @@
   <mat-card>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-        <h2>Log In</h2>
+        <h1 style="font-weight: 500; font-size: 30px; margin-bottom: 10px">
+          Log In
+        </h1>
         <mat-form-field>
           <input
             matInput
@@ -10,7 +12,12 @@
             formControlName="username"
             required
           />
-          <mat-error> Please provide a valid email address </mat-error>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="loginForm.get('username')?.hasError('email')"
+            >Invalid email</mat-error
+          >
         </mat-form-field>
         <mat-form-field>
           <input
@@ -20,6 +27,9 @@
             formControlName="password"
             required
           />
+          @if (loginForm.get('password')?.hasError('required')) {
+          <mat-error>Please provide a password</mat-error>
+          }
         </mat-form-field>
         <button mat-raised-button color="primary" [disabled]="loading">
           @if (!loading) { Sign In } @else {
@@ -29,7 +39,9 @@
       </form>
     </mat-card-content>
   </mat-card>
-  <a routerLink="" class="link">Forgot Password? </a>
+  <a (click)="openDialog()" class="link" style="cursor: pointer"
+    >Forgot Password?
+  </a>
   <a routerLink="/sign-up" style="margin-top: 15px" class="link"
     >Member Sign Up</a
   >

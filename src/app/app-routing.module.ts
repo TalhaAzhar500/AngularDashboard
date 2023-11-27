@@ -8,10 +8,15 @@ import { authGuard } from './auth.guard';
 import { ProjectsComponent } from './projects/projects.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'sign-up', component: SignUpComponent },
+  {
+    path: 'newpassword/id/:id/token/:token',
+    component: ForgotPasswordComponent,
+  },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
   { path: 'admins', component: AdminsComponent, canActivate: [authGuard] },
   { path: 'members', component: MembersComponent, canActivate: [authGuard] },
@@ -25,7 +30,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      bindToComponentInputs: true,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

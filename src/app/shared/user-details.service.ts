@@ -8,10 +8,14 @@ export class UserDetailsService {
   data!: userFormat;
 
   constructor() {
-    this.setUserData();
+    this.setUserFromLocalData();
   }
 
-  setUserData() {
+  setUserData(data: any) {
+    this.data = data;
+  }
+
+  setUserFromLocalData() {
     const localData: any = localStorage.getItem('userData');
     const userData = localData ? JSON.parse(localData) : null;
     this.data = userData;

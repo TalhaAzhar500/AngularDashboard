@@ -20,7 +20,10 @@ export class ResetPasswordComponent {
 
   passwordForm = new FormGroup({
     old_password: new FormControl('', [Validators.required]),
-    new_password: new FormControl('', [Validators.required]),
+    new_password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
     confirm_password: new FormControl('', [Validators.required]),
   });
 
@@ -28,27 +31,40 @@ export class ResetPasswordComponent {
 
   onSubmit() {
     if (this.passwordForm.valid) {
+      if (
+        this.passwordForm.value.old_password ===
+        this.passwordForm.value.new_password
+      ) {
+        this.toast.error('New password is same as Old password');
+        return;
+      }
+      if (
+        this.passwordForm.value.new_password !==
+        this.passwordForm.value.confirm_password
+      ) {
+        this.toast.error('Confirm password must be same as New password');
+        return;
+      }
+
       this.loading = true;
       const passwords = this.passwordForm.value;
-      this.http
-        .reset(this.api.ResetPassURL, passwords)
-        .toPromise()
-        .then((res) => {
-          console.log('response', res);
-        });
-
-      // .subscribe({
-      //   next: (result) => {
-      //     console.log('result', result);
-      //     // this.toast.success(result);
-      //     this.loading = false;
-      //   },
-      //   error: (err: any) => {
-      //     console.error('An error occurred:', err);
-      //     this.toast.error(err.error.message);
-      //     this.loading = false;
-      //   },
-      // });
+      this.http.reset(this.api.ResetPassURL, passwords).subscribe({
+        next: (result) => {
+          this.router.navigate(['']);
+          console.log('result', result);
+          this.loading = false;
+        },
+        error: (err: any) => {
+          console.error('An error occurred:', err);
+          this.toast.error(err.error.message);
+          this.loading = false;
+        },
+      });
+      this.passwordForm.patchValue({
+        old_password: '',
+        new_password: '',
+        confirm_password: '',
+      });
     }
   }
 }

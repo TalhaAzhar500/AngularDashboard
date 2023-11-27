@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.main-Box {
+  margin: 20px;
+  padding: 20px;
+}
+
+.innerBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-box {
+  display: inline-flex;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.titles {
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 20px;
+}
