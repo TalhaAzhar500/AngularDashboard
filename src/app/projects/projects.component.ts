@@ -8,6 +8,7 @@ import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { UrlService } from '../shared/url.service';
 import { ProjectFormat } from '../shared/user.interfaces';
 import { Router } from '@angular/router';
+import { InfoModalComponent } from './info-modal/info-modal.component';
 
 @Component({
   selector: 'projects',
@@ -27,9 +28,9 @@ export class ProjectsComponent implements OnInit {
     'platform',
     'client',
     'consultant',
-    'start_date',
-    'end_date',
-    'status',
+    // 'start_date',
+    // 'end_date',
+    // 'status',
     'action',
   ];
   dataSource!: ProjectFormat[];
@@ -99,6 +100,14 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  openInfoDialog(element: any) {
+    const dialogRef = this.matDialog.open(InfoModalComponent, {
+      data: {
+        projectData: element,
+      },
+    });
+  }
+
   handleDelteAdmin(element: any) {
     element.loading = !element.loading;
     this.http.delete(`${this.api.ProjectURL}/${element._id}`).subscribe({
@@ -121,7 +130,7 @@ export class ProjectsComponent implements OnInit {
     const dialogRef = this.matDialog.open(ProjectModalComponent, {
       data: {
         id: element._id,
-        adminsData: this.dataSource,
+        ProjectsData: this.dataSource,
       },
     });
 

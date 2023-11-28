@@ -1,7 +1,7 @@
-<mat-dialog-content style="width: 400px">
+<mat-dialog-content style="width: 500px; max-height: 650px">
   <header><h2>Project Details</h2></header>
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%">
       <mat-label>Project Name</mat-label>
       <input matInput formControlName="name" required />
       @if (projectForm.get('name')?.hasError('required')) {
@@ -9,7 +9,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%; margin-left: 15px">
       <mat-label>Stack</mat-label>
       <input matInput formControlName="stack" required />
       @if (projectForm.get('stack')?.hasError('required')) {
@@ -17,7 +17,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%">
       <mat-label>Team Lead</mat-label>
       <mat-select matInput formControlName="team_lead" required>
         @for (Toption of Toptions; track $index) {
@@ -29,7 +29,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%; margin-left: 15px">
       <mat-label>Duration</mat-label>
       <input matInput formControlName="duration" required />
       @if (projectForm.get('duration')?.hasError('required')) {
@@ -37,7 +37,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%">
       <mat-label>Coordinator</mat-label>
       <mat-select matInput formControlName="coordinator" required>
         @for (Toption of Toptions; track $index) {
@@ -49,7 +49,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%; margin-left: 15px">
       <mat-label>Platform</mat-label>
       <input matInput formControlName="platform" required />
       @if (projectForm.get('paltform')?.hasError('required')) {
@@ -57,7 +57,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%">
       <mat-label>Client</mat-label>
       <input matInput formControlName="client" required />
       @if (projectForm.get('client')?.hasError('required')) {
@@ -65,7 +65,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%; margin-left: 15px">
       <mat-label>Consultant</mat-label>
       <input matInput formControlName="consultant" required />
       @if (projectForm.get('consultant')?.hasError('required')) {
@@ -73,7 +73,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%">
       <mat-label>Status</mat-label>
       <mat-select matInput formControlName="status" required>
         <mat-option value="completed">Completed</mat-option>
@@ -84,7 +84,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 48%; margin-left: 15px">
       <mat-label>Start Date</mat-label>
       <input
         matInput
@@ -103,7 +103,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 49%; margin-right: 15px">
       <mat-label>End Date</mat-label>
       <input
         matInput
@@ -125,12 +125,14 @@
     @if (isValid) {
     <p style="color: red">Please fill all fields</p>
     }
-    <div style="display: flex; margin-top: 10px">
-      <button mat-raised-button color="primary">Save</button>
+    <div style="display: flex; margin-top: 10px; width: 48%; float: right">
+      <button mat-raised-button color="primary" style="width: 100px">
+        Save
+      </button>
       <button
         mat-stroked-button
         color="primary"
-        style="margin-left: 5px"
+        style="margin-left: 5px; width: 100px"
         matDialogClose
       >
         Cancel

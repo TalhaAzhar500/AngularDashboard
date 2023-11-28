@@ -15,8 +15,8 @@ export class ProjectModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data) {
-      const editData = data.adminsData?.find(
-        (adminData: any) => adminData._id === data.id
+      const editData = data.ProjectsData?.find(
+        (ProjectsData: any) => ProjectsData._id === data.id
       );
       if (editData) {
         this.projectForm.patchValue({

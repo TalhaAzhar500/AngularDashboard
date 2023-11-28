@@ -1,10 +1,5 @@
-<button
-  mat-icon-button
-  [matMenuTriggerFor]="menu"
-  #menuTrigger
-  style="font-size: 12px; text-align: center"
->
-  <mat-icon style="font-size: 29px">list</mat-icon>
+<button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger>
+  <mat-icon style="transform: scale(1.8)">list</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
   @if (role==="super") {

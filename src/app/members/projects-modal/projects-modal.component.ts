@@ -24,7 +24,6 @@ export class ProjectsModalComponent {
     } else {
       this.show = false;
     }
-    console.log('data', data.projectsData.projects);
   }
 
   displayedColumns: string[] = [
