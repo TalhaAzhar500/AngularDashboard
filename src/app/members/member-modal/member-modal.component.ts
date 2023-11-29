@@ -51,7 +51,7 @@ export class MemberModalComponent {
     this.Poptions = data;
   }
 
-  Toptions = ['Fahad Tufail', 'RubNawaz Ansari', 'Marsad'];
+  Toptions = ['Fahad Tufail', 'RubNawaz Ansari', 'Marsad', 'azeem'];
   isValid: boolean = false;
   Poptions!: ProjectFormat[];
 
