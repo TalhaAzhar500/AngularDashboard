@@ -29,12 +29,21 @@
       }
     </mat-form-field>
 
-    <mat-form-field style="width: 48%; margin-left: 15px">
+    <mat-form-field style="width: 23%; margin-left: 15px">
       <mat-label>Duration</mat-label>
       <input matInput formControlName="duration" required />
       @if (projectForm.get('duration')?.hasError('required')) {
       <mat-error>Duration is required</mat-error>
       }
+    </mat-form-field>
+
+    <mat-form-field style="width: 23%; margin-left: 2px">
+      <mat-label>Unit</mat-label>
+      <mat-select matInput>
+        <mat-option value="months">Months</mat-option>
+        <mat-option value="weeks">Weeks</mat-option>
+        <mat-option value="days">Days</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field style="width: 48%">

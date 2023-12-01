@@ -21,21 +21,34 @@ export class MembersComponent implements OnInit {
   @ViewChild(MatTable) matTable!: MatTable<MemberFormat>;
 
   displayedColumns: string[] = [
-    'projectModal',
     'username',
     'first_name',
     'last_name',
     'email',
     'tech_stack',
     'team_lead',
+    'projectModal',
     'action',
   ];
+
+  displayedColumns2: string[] = [
+    'username',
+    'first_name',
+    'last_name',
+    'email',
+    'tech_stack',
+    'team_lead',
+    'projectModal',
+  ];
+
   dataSource!: MemberFormat[];
   projectsData!: ProjectFormat[];
   search!: MemberFormat[];
   role: string = this.userData.data.role;
   loading: boolean = false;
   tableLoading: boolean = true;
+  userID: string = this.userData.data.id;
+  ShowActionHeading: boolean = true;
 
   constructor(
     private matDialog: MatDialog,
@@ -49,6 +62,7 @@ export class MembersComponent implements OnInit {
   ngOnInit(): void {
     this.getMembersData();
     this.getProjectData();
+    this.ShowActionHeading = this.role === 'admin' ? true : false;
   }
 
   applyFilter(event: Event) {

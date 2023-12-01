@@ -7,6 +7,7 @@ import { UrlService } from '../shared/url.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 import { UserDetailsService } from '../shared/user-details.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
     private router: Router,
     private toast: ToastrService,
     private api: UrlService,
-    private user: UserDetailsService
+    private user: UserDetailsService,
+    private location: Location
   ) {}
 
   loginForm = new FormGroup({
@@ -46,7 +48,7 @@ export class LoginComponent {
             this.user.setUserData(result);
             const userData = JSON.stringify(result);
             localStorage.setItem('userData', userData);
-            this.router.navigate(['admins']);
+            this.router.navigate(['/dashboard/home']);
             this.loading = false;
           }
         },

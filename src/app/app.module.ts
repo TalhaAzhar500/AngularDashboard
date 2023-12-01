@@ -35,10 +35,18 @@ import { ForgotPasswordModalComponent } from './login/forgot-password-modal/forg
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProjectsModalComponent } from './members/projects-modal/projects-modal.component';
 import { InfoModalComponent } from './projects/info-modal/info-modal.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DatePipe } from '@angular/common';
+import { HomeComponent } from './home/home.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
+    SideNavbarComponent,
+    HomeComponent,
     AdminsComponent,
     ModalComponent,
     MembersComponent,
@@ -75,9 +83,13 @@ import { InfoModalComponent } from './projects/info-modal/info-modal.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

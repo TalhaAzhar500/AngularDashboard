@@ -9,6 +9,8 @@ import { UrlService } from '../shared/url.service';
 import { ProjectFormat } from '../shared/user.interfaces';
 import { Router } from '@angular/router';
 import { InfoModalComponent } from './info-modal/info-modal.component';
+import { DatePipe } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'projects',
@@ -43,7 +45,8 @@ export class ProjectsComponent implements OnInit {
     private http: HTTPService,
     private toast: ToastrService,
     private api: UrlService,
-    private router: Router
+    private router: Router,
+    private date: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -78,6 +81,14 @@ export class ProjectsComponent implements OnInit {
         this.toast.error('Error in getting projects from Server');
       },
     });
+  }
+
+  getTooltipText(element: any): string {
+    const startDate = `Start Date: ${this.date.transform(element.start_date)}`;
+    const endDate = `End Date: ${this.date.transform(element.end_date)}`;
+    const status = `Status: ${element.status}`;
+
+    return `${startDate} \n${endDate} \n${status}`;
   }
 
   openDialog() {
