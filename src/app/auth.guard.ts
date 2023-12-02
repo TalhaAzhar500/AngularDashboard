@@ -8,20 +8,20 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 
   if (userData) {
     if (route.routeConfig?.path === 'login') {
-      router.navigate(['admins']);
+      router.navigate(['/dashboard/home']);
       return false;
     }
 
     if (route.routeConfig?.path === 'admins') {
       if (userData?.role !== 'super') {
-        router.navigate(['projects']);
+        router.navigate(['/dashboard/home']);
         return false;
       }
     }
 
     if (route.routeConfig?.path === 'projects') {
       if (userData?.role === 'user') {
-        router.navigate(['members']);
+        router.navigate(['/dashboard/home']);
         return false;
       }
     }
