@@ -10,7 +10,9 @@ body {
 }
 
 .myTooltip {
+  white-space: pre-line;
   .mdc-tooltip__surface {
+    white-space: pre-line;
     max-width: 150px;
     font-size: 14px;
     padding: 5px;
@@ -21,8 +23,8 @@ body {
 
 .custom-tooltip {
   min-width: 300px;
-  background-color: #2196f3; /* Tooltip background color */
-  color: #fff; /* Tooltip text color */
+  background-color: #2196f3;
+  color: #fff;
   padding: 8px 12px;
 }
 

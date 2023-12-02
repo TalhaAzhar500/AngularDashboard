@@ -84,11 +84,36 @@ export class ProjectsComponent implements OnInit {
   }
 
   getTooltipText(element: any): string {
+    const SDate: any = new Date(element.start_date);
+    const EDate: any = new Date(element.end_date);
+
+    const timeDiff = EDate.getTime() - SDate.getTime();
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+    const roundedDays = this.roundOff(daysDiff);
+
+    const monthsDiff = daysDiff / 30;
+    const roundedMonths = this.roundOff(monthsDiff);
+
     const startDate = `Start Date: ${this.date.transform(element.start_date)}`;
     const endDate = `End Date: ${this.date.transform(element.end_date)}`;
     const status = `Status: ${element.status}`;
+    const days = `Days: ${roundedDays}`;
+    const months = `Months: ${roundedMonths}`;
 
-    return `${startDate} \n${endDate} \n${status}`;
+    return `\ ${months}
+    \ ${startDate} 
+    \ ${endDate}
+     \ ${status}`;
+  }
+
+  roundOff(value: number): number {
+    const decimalPart = value - Math.floor(value);
+
+    if (decimalPart >= 0.5) {
+      return Math.ceil(value);
+    } else {
+      return Math.floor(value);
+    }
   }
 
   openDialog() {

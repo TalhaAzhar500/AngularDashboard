@@ -56,6 +56,12 @@ export class ProjectModalComponent {
 
   onSubmit() {
     if (this.projectForm.valid) {
+      const SDate: any = this.projectForm.value.start_date;
+      const EDate: any = this.projectForm.value.end_date;
+      if (EDate <= SDate) {
+        console.log('End date is Less');
+        return;
+      }
       this.isValid = false;
       this.dialogRef.close(this.projectForm.value);
     } else {

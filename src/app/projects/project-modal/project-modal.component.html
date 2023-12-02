@@ -31,7 +31,13 @@
 
     <mat-form-field style="width: 23%; margin-left: 15px">
       <mat-label>Duration</mat-label>
-      <input matInput formControlName="duration" required />
+      <input
+        matInput
+        formControlName="duration"
+        required
+        type="number"
+        min="0"
+      />
       @if (projectForm.get('duration')?.hasError('required')) {
       <mat-error>Duration is required</mat-error>
       }
