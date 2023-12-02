@@ -8,7 +8,6 @@ import { ProjectModalComponent } from './project-modal/project-modal.component';
 import { UrlService } from '../shared/url.service';
 import { ProjectFormat } from '../shared/user.interfaces';
 import { Router } from '@angular/router';
-import { InfoModalComponent } from './info-modal/info-modal.component';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -133,14 +132,6 @@ export class ProjectsComponent implements OnInit {
           },
         });
       }
-    });
-  }
-
-  openInfoDialog(element: any) {
-    const dialogRef = this.matDialog.open(InfoModalComponent, {
-      data: {
-        projectData: element,
-      },
     });
   }
 

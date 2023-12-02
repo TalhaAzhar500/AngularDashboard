@@ -68,9 +68,11 @@
           ><span>Settings</span></mat-expansion-panel-header
         >
         <mat-nav-list>
+          @if (role!=='super') {
           <a mat-list-item routerLink="/dashboard/reset-password">
             <mat-icon>refresh</mat-icon><span>Reset Password</span>
           </a>
+          }
           <a mat-list-item (click)="handleLogout()">
             <mat-icon>exit_to_app</mat-icon><span>Logout</span>
           </a>

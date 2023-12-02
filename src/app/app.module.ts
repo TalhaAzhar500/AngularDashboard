@@ -34,7 +34,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ForgotPasswordModalComponent } from './login/forgot-password-modal/forgot-password-modal.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProjectsModalComponent } from './members/projects-modal/projects-modal.component';
-import { InfoModalComponent } from './projects/info-modal/info-modal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
@@ -57,7 +56,6 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
     NotFoundComponent,
     ProjectsComponent,
     ProjectModalComponent,
-    InfoModalComponent,
     ResetPasswordComponent,
     SignUpComponent,
     MenuComponent,
