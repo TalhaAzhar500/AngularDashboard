@@ -45,16 +45,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: SideNavbarComponent,
+    loadChildren: () =>
+      import('./dashboard/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
     canActivate: [authGuard],
-    children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'admins', component: AdminsComponent },
-      { path: 'members', component: MembersComponent },
-      { path: 'projects', component: ProjectsComponent },
-      { path: 'reset-password', component: ResetPasswordComponent },
-    ],
   },
   { path: '**', component: NotFoundComponent },
 ];
