@@ -21,7 +21,6 @@ export class SideNavbarComponent implements OnInit {
     const LocalData: any = localStorage.getItem('userData');
     const data = JSON.parse(LocalData);
     this.role = this.userData.data.role;
-    console.log('role', data);
   }
 
   role: string = this.userData?.data?.role;

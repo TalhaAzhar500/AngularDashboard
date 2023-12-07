@@ -12,7 +12,7 @@ export class HTTPService {
   ) {}
 
   private getHeaders(): HttpHeaders {
-    const token: string = this.userDetails.data.access_token;
+    const token: string = this.userDetails.data.accesstoken;
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

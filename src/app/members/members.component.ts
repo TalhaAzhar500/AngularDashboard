@@ -5,7 +5,11 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { HTTPService } from '../http.service';
 import { ToastrService } from 'ngx-toastr';
 import { UrlService } from '../shared/url.service';
-import { MemberFormat, ProjectFormat } from '../shared/user.interfaces';
+import {
+  DepartmentFormat,
+  MemberFormat,
+  ProjectFormat,
+} from '../shared/user.interfaces';
 import { MemberModalComponent } from './member-modal/member-modal.component';
 import { UserDetailsService } from '../shared/user-details.service';
 import { Router } from '@angular/router';
@@ -21,28 +25,26 @@ export class MembersComponent implements OnInit {
   @ViewChild(MatTable) matTable!: MatTable<MemberFormat>;
 
   displayedColumns: string[] = [
-    'username',
-    'first_name',
-    'last_name',
+    'name',
     'email',
+    'role',
     'tech_stack',
-    'team_lead',
     'projectModal',
     'action',
   ];
 
   displayedColumns2: string[] = [
-    'username',
-    'first_name',
-    'last_name',
+    'name',
     'email',
+    'role',
     'tech_stack',
-    'team_lead',
     'projectModal',
   ];
 
   dataSource!: MemberFormat[];
   projectsData!: ProjectFormat[];
+  membersData!: MemberFormat[];
+  departmentData!: DepartmentFormat[];
   search!: MemberFormat[];
   role: string = this.userData.data.role;
   loading: boolean = false;
@@ -62,6 +64,7 @@ export class MembersComponent implements OnInit {
   ngOnInit(): void {
     this.getMembersData();
     this.getProjectData();
+    this.getDepartmentData();
     this.ShowActionHeading = this.role === 'admin' ? true : false;
   }
 
@@ -70,20 +73,26 @@ export class MembersComponent implements OnInit {
     const data = this.search.filter((data) => {
       return filterValue.toLowerCase() === ''
         ? data
-        : data.username.toLowerCase().includes(filterValue) ||
-            data.first_name.toLowerCase().includes(filterValue) ||
-            data.last_name.toLowerCase().includes(filterValue);
+        : data.name.toLowerCase().includes(filterValue);
     });
     this.dataSource = data;
     this.matTable.renderRows();
   }
 
   getMembersData() {
-    this.http.get(this.api.MemberURL).subscribe({
+    this.http.get(this.api.MembersURL).subscribe({
       next: (response) => {
-        const data: any = response;
-        this.dataSource = data;
-        this.search = data;
+        const ResponseData: any = response;
+        const data: MemberFormat[] = ResponseData;
+        this.membersData = data.filter(
+          (member) =>
+            member.role !== 'SUPERADMIN' &&
+            member.role !== 'ADMIN' &&
+            member.role !== 'HR' &&
+            member.role !== 'SALES_AGENT'
+        );
+        this.dataSource = this.membersData;
+        this.search = this.membersData;
         this.tableLoading = false;
       },
       error: (error) => {
@@ -113,16 +122,30 @@ export class MembersComponent implements OnInit {
     });
   }
 
+  getDepartmentData() {
+    this.http.get(this.api.DepartmentURL).subscribe({
+      next: (response) => {
+        const data: any = response;
+        this.departmentData = data;
+        console.log('Dep Data', data);
+      },
+      error: (error) => {
+        console.log('Error occoured', error);
+        this.toast.error('Error in getting Projects from Server');
+      },
+    });
+  }
+
   openDialog() {
     const dialogRef = this.matDialog.open(MemberModalComponent, {
       data: {
-        projectsData: this.projectsData,
+        departmentData: this.departmentData,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.http.add(this.api.MemberURL, result).subscribe({
+        this.http.add(this.api.AddMemberURL, result).subscribe({
           next: (response) => {
             this.toast.success('Member Added Successfully');
             this.getMembersData();
@@ -148,7 +171,7 @@ export class MembersComponent implements OnInit {
 
   handleDelteAdmin(element: any) {
     element.loading = !element.loading;
-    this.http.delete(`${this.api.MemberURL}/${element._id}`).subscribe({
+    this.http.delete(`${this.api.MembersURL}/${element._id}`).subscribe({
       next: (response: any) => {
         this.getMembersData();
         this.matTable.renderRows();
@@ -168,7 +191,7 @@ export class MembersComponent implements OnInit {
     const dialogRef = this.matDialog.open(MemberModalComponent, {
       data: {
         id: element._id,
-        adminsData: this.dataSource,
+        membersData: this.membersData,
         projectsData: this.projectsData,
       },
     });
@@ -177,7 +200,7 @@ export class MembersComponent implements OnInit {
       if (result) {
         element.loading = !element.loading;
         this.http
-          .edit(`${this.api.MemberURL}/${element._id}`, result)
+          .edit(`${this.api.MembersURL}/${element._id}`, result)
           .subscribe({
             next: (response: any) => {
               this.getMembersData();

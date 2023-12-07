@@ -1,26 +1,23 @@
 export interface userFormat {
-  access_token: string;
+  accesstoken: string;
   id: string;
   name: string;
   role: string;
 }
 
-export interface AdminFormat {
+export interface DepartmentFormat {
   _id: number;
-  admin_name: string;
-  email: string;
-  role: string;
+  name: string;
+  department_head: string;
+  createdBy: string;
 }
 
 export interface MemberFormat {
-  username: string;
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
   password: string;
   tech_stack: string;
-  team_lead: string;
-  expense: number;
+  role: string;
   projects: string;
 }
 

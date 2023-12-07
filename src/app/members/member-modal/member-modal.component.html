@@ -2,24 +2,11 @@
   <header><h2>Member Details</h2></header>
   <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
     <mat-form-field style="width: 48%">
-      <mat-label>Userame</mat-label>
-      <input matInput formControlName="username" required />
-      @if (memberForm.get('username')?.hasError('required')) {
-      <mat-error>Username is required</mat-error>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+      @if (memberForm.get('name')?.hasError('required')) {
+      <mat-error>Name is required</mat-error>
       }
-    </mat-form-field>
-
-    <mat-form-field style="width: 48%; margin-left: 15px">
-      <mat-label>First Name</mat-label>
-      <input matInput formControlName="first_name" required />
-      @if (memberForm.get('first_name')?.hasError('required')) {
-      <mat-error>First Name is required</mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field style="width: 48%">
-      <mat-label>Last Name</mat-label>
-      <input matInput formControlName="last_name" />
     </mat-form-field>
 
     <mat-form-field style="width: 48%; margin-left: 15px">
@@ -42,26 +29,42 @@
     </mat-form-field>
 
     <mat-form-field style="width: 48%; margin-left: 15px">
-      <mat-label>Team Lead</mat-label>
-      <mat-select matInput formControlName="team_lead">
+      <mat-label>Role</mat-label>
+      <mat-select matInput formControlName="role">
         @for (Toption of Toptions; track $index) {
         <mat-option [value]="Toption">{{ Toption }}</mat-option>
         }
       </mat-select>
+      @if (memberForm.get('role')?.hasError('required')) {
+      <mat-error>Role is required</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field style="width: 48%">
-      <mat-label>Projects</mat-label>
-      <mat-select matInput formControlName="projects" multiple>
-        @for (option of Poptions; track $index) {
+      <mat-label>Departments</mat-label>
+      <mat-select matInput formControlName="department" multiple>
+        @for (option of Doptions; track $index) {
         <mat-option [value]="option._id">{{ option.name }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
     <mat-form-field style="width: 48%; margin-left: 15px">
-      <mat-label>Expense</mat-label>
-      <input matInput formControlName="expense" type="number" min="0" />
+      <mat-label>Teams</mat-label>
+      <mat-select matInput formControlName="teams" multiple>
+        @for (option of Poptions; track $index) {
+        <mat-option [value]="option._id">{{ option.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%; margin-right: 55px">
+      <mat-label>Projects</mat-label>
+      <mat-select matInput formControlName="projects" multiple>
+        @for (option of Poptions; track $index) {
+        <mat-option [value]="option._id">{{ option.name }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     @if (isValid) {

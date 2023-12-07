@@ -37,7 +37,7 @@
       <mat-list-item routerLink="/dashboard/home" routerLinkActive="active-tab">
         <mat-icon>home</mat-icon><span>Home</span>
       </mat-list-item>
-      @if (role==='super') {
+      @if (role==='SUPERADMIN' || role==='HR') {
       <mat-list-item
         routerLink="/dashboard/admins"
         routerLinkActive="active-tab"
@@ -68,7 +68,7 @@
           ><span>Settings</span></mat-expansion-panel-header
         >
         <mat-nav-list>
-          @if (role!=='super') {
+          @if (role!=='SUPERADMIN') {
           <a mat-list-item routerLink="/dashboard/reset-password">
             <mat-icon>refresh</mat-icon><span>Reset Password</span>
           </a>

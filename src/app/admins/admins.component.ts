@@ -6,7 +6,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { HTTPService } from '../http.service';
 import { ToastrService } from 'ngx-toastr';
 import { UrlService } from '../shared/url.service';
-import { AdminFormat } from '../shared/user.interfaces';
+import { MemberFormat } from '../shared/user.interfaces';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,11 +16,12 @@ import { Router } from '@angular/router';
 })
 export class AdminsComponent implements OnInit {
   @ViewChild('actionTrigger') actionTrigger!: MatMenuTrigger;
-  @ViewChild(MatTable) matTable!: MatTable<AdminFormat>;
+  @ViewChild(MatTable) matTable!: MatTable<MemberFormat>;
 
   displayedColumns: string[] = ['admin_name', 'email', 'role', 'action'];
-  dataSource!: AdminFormat[];
-  search!: AdminFormat[];
+  dataSource!: MemberFormat[];
+  membersData!: MemberFormat[];
+  search!: MemberFormat[];
   loading: boolean = false;
   tableLoading: boolean = true;
 
@@ -41,18 +42,22 @@ export class AdminsComponent implements OnInit {
     const data = this.search.filter((data) => {
       return filterValue.toLowerCase() === ''
         ? data
-        : data.admin_name.toLowerCase().includes(filterValue);
+        : data.name.toLowerCase().includes(filterValue);
     });
     this.dataSource = data;
     this.matTable.renderRows();
   }
 
   getData() {
-    this.http.get(this.api.AdminURL).subscribe({
+    this.http.get(this.api.MembersURL).subscribe({
       next: (response) => {
-        const data: any = response;
-        this.dataSource = data;
-        this.search = data;
+        const ResponseData: any = response;
+        const data: MemberFormat[] = ResponseData;
+        this.membersData = data.filter(
+          (member) => member.role === 'ADMIN' || member.role === 'HR'
+        );
+        this.dataSource = this.membersData;
+        this.search = this.membersData;
         this.tableLoading = false;
       },
       error: (error) => {
@@ -71,7 +76,7 @@ export class AdminsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.http.add(this.api.AdminURL, result).subscribe({
+        this.http.add(this.api.AddMemberURL, result).subscribe({
           next: (response) => {
             this.toast.success('Admin Added Successfully');
             this.getData();
@@ -88,7 +93,7 @@ export class AdminsComponent implements OnInit {
 
   handleDelteAdmin(element: any): void {
     element.loading = !element.loading;
-    this.http.delete(`${this.api.AdminURL}/${element._id}`).subscribe({
+    this.http.delete(`${this.api.MembersURL}/${element._id}`).subscribe({
       next: (response: any) => {
         this.getData();
         this.matTable.renderRows();

@@ -3,7 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MembersComponent } from '../members.component';
-import { ProjectFormat } from 'src/app/shared/user.interfaces';
+import {
+  DepartmentFormat,
+  ProjectFormat,
+} from 'src/app/shared/user.interfaces';
 
 @Component({
   selector: 'app-member-modal',
@@ -23,27 +26,26 @@ export class MemberModalComponent {
     public dialogRef: MatDialogRef<MembersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    if (data?.adminsData) {
-      const editData = data.adminsData?.find(
-        (adminData: any) => adminData._id === data.id
+    console.log('MOdal Data', data.departmentData);
+    if (data?.membersData) {
+      const editData = data.membersData?.find(
+        (memberData: any) => memberData._id === data.id
       );
 
       this.setProjectOptions(data.projectsData);
       const ProjectIDs = editData.projects?.map((project: any) => project._id);
       if (editData) {
         this.memberForm.patchValue({
-          username: editData.username,
-          first_name: editData.first_name,
-          last_name: editData.last_name,
+          name: editData.name,
           email: editData.email,
           tech_stack: editData.tech_stack,
-          team_lead: editData.team_lead,
+          role: editData.role,
           projects: ProjectIDs,
-          expense: editData.expense,
         });
       }
     } else {
-      this.setProjectOptions(data.projectsData);
+      this.setProjectOptions(data?.projectsData ? data.projectsData : []);
+      this.setDepartmentOptions(data.departmentData);
     }
   }
 
@@ -51,23 +53,28 @@ export class MemberModalComponent {
     this.Poptions = data;
   }
 
-  Toptions = ['Fahad Tufail', 'RubNawaz Ansari', 'Marsad', 'azeem'];
+  setDepartmentOptions(data: any) {
+    this.Doptions = data;
+  }
+
+  Toptions = ['HR', 'TECH', 'HELPER'];
   isValid: boolean = false;
   Poptions!: ProjectFormat[];
+  Doptions!: DepartmentFormat[];
 
   memberForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    first_name: new FormControl('', [Validators.required]),
-    last_name: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     tech_stack: new FormControl(''),
-    team_lead: new FormControl(''),
+    role: new FormControl('', [Validators.required]),
+    department: new FormControl('656f2f35c0cbe64a98cf76e7'),
+    teams: new FormControl('656f2f35c0cbe64a98cf76e7'),
     projects: new FormControl([]),
-    expense: new FormControl(0, [Validators.required]),
   });
 
   onSubmit() {
     if (this.memberForm.valid) {
+      console.log('data', this.memberForm.value);
       this.isValid = false;
       this.dialogRef.close(this.memberForm.value);
     } else {

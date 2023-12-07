@@ -1,42 +1,62 @@
-<mat-dialog-content style="width: 400px">
+<mat-dialog-content style="width: 500px">
   <header><h2>Add Admins</h2></header>
-  <form [formGroup]="adminForm" (ngSubmit)="submitForm()">
-    <p>
-      <mat-form-field style="width: 100%">
-        <input
-          matInput
-          placeholder="Name"
-          formControlName="admin_name"
-          required=""
-        />
-        <mat-error *ngIf="adminForm.get('admin_name')?.hasError('required')"
-          >Name is required</mat-error
-        >
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field style="width: 100%">
-        <input matInput placeholder="Email" required formControlName="email" />
-        <mat-error *ngIf="adminForm.get('email')?.hasError('required')"
-          >Email is required</mat-error
-        >
-        <mat-error *ngIf="adminForm.get('email')?.hasError('email')"
-          >Invalid email</mat-error
-        >
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field style="width: 100%">
-        <input
-          matInput
-          type="password"
-          placeholder="Password"
-          required
-          formControlName="password"
-        />
-        <mat-error>Password should be minimum of 5 length</mat-error>
-      </mat-form-field>
-    </p>
+  <form [formGroup]="memberForm" (ngSubmit)="submitForm()">
+    <mat-form-field style="width: 48%">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+      @if (memberForm.get('name')?.hasError('required')) {
+      <mat-error>Name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%; margin-left: 15px">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required />
+      @if(memberForm.get('email')?.hasError('required')){
+      <mat-error>Email is required</mat-error>
+      }@else {
+      <mat-error>Invalid email</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%">
+      <mat-label>Tech Stack</mat-label>
+      <mat-select formControlName="tech_stack">
+        @for (option of options; track $index) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%; margin-left: 15px">
+      <mat-label>Role</mat-label>
+      <mat-select matInput formControlName="role">
+        @for (Toption of Toptions; track $index) {
+        <mat-option [value]="Toption">{{ Toption }}</mat-option>
+        }
+      </mat-select>
+      @if (memberForm.get('role')?.hasError('required')) {
+      <mat-error>Role is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%">
+      <mat-label>Departments</mat-label>
+      <mat-select matInput formControlName="department" multiple>
+        @for (option of Poptions; track $index) {
+        <mat-option [value]="option._id">{{ option.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 48%; margin-left: 15px">
+      <mat-label>Teams</mat-label>
+      <mat-select matInput formControlName="teams" multiple>
+        @for (option of Poptions; track $index) {
+        <mat-option [value]="option._id">{{ option.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
     <p *ngIf="isValid" style="color: red">Please fill all fields</p>
     <div style="display: flex">
       <button
